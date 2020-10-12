@@ -1,191 +1,324 @@
 package com.meli.lv1.service;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MutantCheckerTest {
 
-    @Test
-    public void test_horizontal_firt_have_one() {
-//        String[] dna = {"A T G C G A",
-//                        "C A G T G C",
-//                        "T T A T G T",
-//                        "A G A A G G",
-//                        "C C C C T A",
-//                        "T C A C T G"};
 
-        String[] dna = {"A T T T T A",
+    public void testMeliExample() {
+        String[] dna = {
+                "A T G C G A",
                 "C A G T G C",
                 "T T A T G T",
                 "A G A A G G",
                 "C C C C T A",
                 "T C A C T G"};
+        removeSpace(dna);
 
-        for (int i = 0; i < dna.length; i++) {
-            dna[i] = dna[i].replaceAll("\\W", "");
-        }
         boolean result = MutantChecker.isMutant(dna);
 
         assertTrue(result);
     }
 
     @Test
-    public void test_horizonatl_firtHaveTwo() {
-        String[] dna = {"A T T T T G G G G A",
+    public void testIsNoMutant_onlyOneCoincidence() {
+        String[] dna = {
+                "A T G C G A",
                 "C A G T G C",
-                "T T A T G T",
+                "T T A T A T",
                 "A G A A G G",
-                "C C C C T A",
+                "C G C C T A",
                 "T C A C T G"};
+        removeSpace(dna);
 
-        for (int i = 0; i < dna.length; i++) {
-            dna[i] = dna[i].replaceAll("\\W", "");
-        }
-        boolean result = MutantChecker.isMutant(dna);
-
-        assertTrue(result);
-    }
-
-    @Test
-    public void test_horizontal_lastHaveTwo() {
-        String[] dna = {
-                "A T T C T G G G C A G T",
-                "C A G T G C G A G T G C",
-                "T T A T G T T G A G C T",
-                "A G T A G G A G G C G G",
-                "C T A C T A C G C C T A",
-                "T C A C T G G C A C T C",
-                "A G A A G G A G A A C G",
-                "C C A C G A C A C C T A",
-                "T C G G T G T C C C T G",
-                "T C T G T G T 9 A C T G",
-                "T c A C G G R C A C T G",
-                "T T T T T G T C G G G G"};
-
-        for (int i = 0; i < dna.length; i++) {
-            dna[i] = dna[i].replaceAll("\\W", "");
-        }
-        boolean result = MutantChecker.isMutant(dna);
-
-//        for (int i = 0; i < dna.length; i++) {
-//            int result = MutantChecker.hasOliqueSequenceParabajo(dna, i);
-//            System.out.println("linea: " + i + "Resultado: " + result);
-//        }
-        assertTrue(result);
-    }
-
-    @Test
-    public void test_horizontal_lastFirstAndLastHave1() {
-        String[] dna = {
-                "A T T C T G G G G A G T",
-                "C A G T G C C A G T G C",
-                "T T A T G T T T A T G T",
-                "A G A A G G A G A A G G",
-                "C C A C T A C C A C T A",
-                "T C A C T G T C A C T G",
-                "A G A A G G A G A A G G",
-                "C C A C T A C A C C T A",
-                "T C A C T G T C A C T G",
-                "T C A C T G T C A C T G",
-                "T C A C T G T C A C T G",
-                "T T A T T A T C G G G G"};
-
-        for (int i = 0; i < dna.length; i++) {
-            dna[i] = dna[i].replaceAll("\\W", "");
-        }
-        boolean result = MutantChecker.isMutant(dna);
-
-        assertTrue(result);
-    }
-
-    @Test
-    public void test_horizontal_onlyOne() {
-        String[] dna = {
-                "A T T C T G G G T A G T",
-                "C A G T G C C A G T G C",
-                "T T A T G T T T A T G T",
-                "A G A A G G A G A A G G",
-                "C C A C T A C C A C T A",
-                "T C A C T G T C A C T G",
-                "A G A A G G A G A A G G",
-                "C C A C T A C A C C T A",
-                "T C A C T G T C A C T G",
-                "T C A C T G T C A C T G",
-                "T C A C T G T C A C T G",
-                "T T A T T A T C G G G G"};
-
-        for (int i = 0; i < dna.length; i++) {
-            dna[i] = dna[i].replaceAll("\\W", "");
-        }
         boolean result = MutantChecker.isMutant(dna);
 
         assertFalse(result);
     }
 
     @Test
-    public void test_vertical_firt_have_one() {
-        String[] dna = {"A T G C G A",
-                "C A A T G C",
-                "C T A T G T",
-                "C G A A G G",
-                "C C A C T A",
+    public void testIsNoMutant_noCoincidence() {
+        String[] dna = {
+                "A T G C G A",
+                "C A G T G C",
+                "T T G T A T",
+                "A G A A G G",
+                "C G C C T A",
                 "T C A C T G"};
+        removeSpace(dna);
 
-        for (int i = 0; i < dna.length; i++) {
-            dna[i] = dna[i].replaceAll("\\W", "");
-        }
+        boolean result = MutantChecker.isMutant(dna);
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void testIsNoMutant_noCoincidenceBig() {
+        String[] dna = {
+                "A T G C G A A T G C G A",
+                "C A G T G C C A G T G C",
+                "T T G T A T T T G T A T",
+                "A G A A G G A G A A G G",
+                "C G C C T A C G C C T A",
+                "T C A C T G T C A C T G",
+                "A T G C G A A T G C G A",
+                "C A G T G C C A G T G C",
+                "T T G T A T T T G T A T",
+                "A G A A G G A G A A G G",
+                "C G C C T A C G C C T A",
+                "T C A C T G T C A C T G"
+        };
+        removeSpace(dna);
+
+        boolean result = MutantChecker.isMutant(dna);
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void testIsNoMutant_noCoincidenceBig_manyWith3() {
+        String[] dna = {
+                "A T T A T A A A T T T A",
+                "G G G C G G G C C C G C",
+                "A A A T A T T T A T T T",
+                "A G A A G G A G A A G G",
+                "C A C C T A C A C C T A",
+                "T C A C T G T C A C T A",
+                "A T G C G T A T G C G A",
+                "C A G T T C C A G T G C",
+                "T T G A A C T T G T A C",
+                "A G T A G G A G A A A C",
+                "C T C C T A C C C C T A",
+                "T C A C T G T C C C T G"
+        };
+        removeSpace(dna);
+
+        boolean result = MutantChecker.isMutant(dna);
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void testIsNoMutant_twoConsecutiveHorizontal() {
+        String[] dna = {
+                "A T G C G A A T G C G A",
+                "C A G T G C C A G T G C",
+                "T T G T A T T T G T A T",
+                "A G A A G G A G A A G G",
+                "C G C C T A C G C C T A",
+                "T C A C T G T C A C T G",
+                "A T G C G A A T G C G A",
+                "C A A A A A A A A T G C",
+                "T T G T A T T T G T A T",
+                "A G A C G G A G A A G G",
+                "C G C C T A C G C C T A",
+                "T C A C T G T C A C T G"
+        };
+        removeSpace(dna);
+
         boolean result = MutantChecker.isMutant(dna);
 
         assertTrue(result);
     }
 
     @Test
-    public void test_vertical_firt_have_two() {
-        String[] dna = {"A T G C G A T G C G A A",
-                "C A A T G C T G C G A A",
-                "C T A T G T T A T G T T",
-                "C G G A G G G A T G T A",
-                "C C A C T A C C A C A A",
-                "T C A C T G C T A C T A",
-                "A T G C G A C C T A T T",
-                "C A A T T C C T A C A A",
-                "C T G T G T C C A C T T",
-                "C G A A G G C T T A T A",
-                "C C A C T A C C A C A A",
-                "T C A C T G C C A C T A"};
+    public void testIsNoMutant_twoConsecutiveVertical() {
+        String[] dna = {
+                "A T G C G A A T G C G A",
+                "C A G T G C C A G T G C",
+                "T T G T A T T T G T A T",
+                "A G A A G G A G A A G G",
+                "C G C C T A C G C C T G",
+                "T C A C T G T C A C T G",
+                "A T G C G A A T G C G G",
+                "C A T A A T A A A T G G",
+                "T T G G A T T T G T A G",
+                "A G A C G G A G A A G G",
+                "C G C C T A C G C C T G",
+                "T C A C T G T C A C T G"
+        };
+        removeSpace(dna);
 
-        for (int i = 0; i < dna.length; i++) {
-            dna[i] = dna[i].replaceAll("\\W", "");
-        }
         boolean result = MutantChecker.isMutant(dna);
 
         assertTrue(result);
     }
 
     @Test
-    public void test_vertical_firtAndLast_have_One() {
-        String[] dna = {"A T G C G A T G C G A A",
-                "C A A T G C T G C A A A",
-                "C T A T A T T A T G T T",
-                "A G G A G G G A T G T A",
-                "C C A C T A C C A C A A",
-                "T C A C T G A T A C T A",
-                "A T G C G A C C T A T T",
-                "C A A T T C C T A C A A",
-                "C T G T G T C C A C T A",
-                "C G A A G G A T T A T A",
-                "C C A C T A C C A C A A",
-                "T C A C T G C C A C T A"};
+    public void testIsNoMutant_twoConsecutiveObliqueRight() {
+        String[] dna = {
+                "A T T A T A A A T T T A",
+                "G G G C G G G C C C G C",
+                "A A A T A T T T A T T T",
+                "A G A A G G A G A A G G",
+                "C A C C T A C A C C T A",
+                "T C A C T G T C A C T A",
+                "A T C A G T A T G C G A",
+                "C A G C T C C A G T G C",
+                "T T G A C C T T G T A C",
+                "A G T A G C A G A A A C",
+                "C T C C T A C C C C T A",
+                "T C A C T G T C C C T G"
+        };
+        removeSpace(dna);
 
-        for (int i = 0; i < dna.length; i++) {
-            dna[i] = dna[i].replaceAll("\\W", "");
-        }
         boolean result = MutantChecker.isMutant(dna);
 
         assertTrue(result);
     }
 
+    @Test
+    public void testIsNoMutant_twoConsecutiveObliqueLeft() {
+        String[] dna = {
+                "A T T A T A A A T T T A",
+                "G G G C G G G C C C A C",
+                "A A A T A T T T A A T T",
+                "A G A A G G A G A A G G",
+                "C A C C T A C A C C T A",
+                "T C A C T G A C A C T A",
+                "A T G C G A A T G C G A",
+                "C A G T A C C A G T G C",
+                "T T G A A C T T G T A C",
+                "A G T A G G A G A T A C",
+                "C T C C T A C C A C T A",
+                "T C A C T G T C C C T G"
+        };
+        removeSpace(dna);
+
+        boolean result = MutantChecker.isMutant(dna);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void testIsNoMutant_superimposedVerticalAndHorizontal() {
+        String[] dna = {
+                "A T G C G A A T G C G A",
+                "C A G T G C C A G T G C",
+                "T T G T A T T T G T A T",
+                "A G A A G G A G A A G G",
+                "C G C C T A C G C C T A",
+                "T C A C T G T C A C T G",
+                "A T G C G A A T G C G A",
+                "C A G T G C C T G T G C",
+                "T T G T A T T T T T A T",
+                "A G A A G G A T A A G G",
+                "C G C C T A C G C C T A",
+                "T C A C T G T C A C T G"
+        };
+        removeSpace(dna);
+
+        boolean result = MutantChecker.isMutant(dna);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void testIsNoMutant_superimposedVerticalAndOblique() {
+        String[] dna = {
+                "A T G C G A A T G C G A",
+                "C A G T G C C A G T G C",
+                "T T G T A T T T G T A T",
+                "A G A A G G A G A A G G",
+                "C G C C T A C G C C T A",
+                "T C A C T G T C A C T G",
+                "A T G C G A A T G C G A",
+                "C A G T G C C T G T G C",
+                "T T G T A T A T T T A T",
+                "A G A A G G A T A T G G",
+                "C G C C T A C G C C T A",
+                "T C A C T G T C A C T G"
+        };
+        removeSpace(dna);
+
+        boolean result = MutantChecker.isMutant(dna);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void testIsNoMutant_superimposedHorizontalAndOblique() {
+        String[] dna = {
+                "A T G C G A A T G C G A",
+                "C A G T G C C A G T G C",
+                "T T G T A T T T G T A T",
+                "A G A A G G A G A A G G",
+                "C G C C T A C G C C T A",
+                "T C A C T G T C A C T G",
+                "A T G C G A A T G C G A",
+                "C A G T G C C G G T G C",
+                "T T G T A T A G T A T T",
+                "A G A A G G A T A T G G",
+                "C G C C T A G T T T T C",
+                "T C A C T G T T A C T G"
+        };
+        removeSpace(dna);
+
+        boolean result = MutantChecker.isMutant(dna);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void testSmallDna() {
+        String[] dna = {
+                "A T G",
+                "C A G",
+                "T T G",
+        };
+        removeSpace(dna);
+
+        boolean result = MutantChecker.isMutant(dna);
+
+        assertFalse(result);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidDna_nxm() {
+        String[] dna = {
+                "A T G G",
+                "C A G G",
+                "T T G G"
+        };
+        removeSpace(dna);
+
+        MutantChecker.isMutant(dna);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidDna_mxn() {
+        String[] dna = {
+                "A T G",
+                "C A G",
+                "T T G",
+                "T T G"
+        };
+        removeSpace(dna);
+
+        MutantChecker.isMutant(dna);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidDna_empty() {
+        String[] dna = {};
+        removeSpace(dna);
+
+        MutantChecker.isMutant(dna);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidDna_null() {
+        MutantChecker.isMutant(null);
+    }
+
+    private void removeSpace(String[] dna) {
+        for (int i = 0; i < dna.length; i++) {
+            dna[i] = dna[i].replaceAll("\\W", "");
+        }
+    }
 
 }
