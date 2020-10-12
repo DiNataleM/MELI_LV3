@@ -1,6 +1,7 @@
 package com.meli.lv1.service;
 
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,7 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MutantCheckerTest {
 
+    private MutantChecker mutantChecker;
 
+    @Before
+    public void setUp() {
+        mutantChecker = new MutantChecker();
+    }
+
+    @Test
     public void testMeliExample() {
         String[] dna = {
                 "A T G C G A",
@@ -19,10 +27,11 @@ public class MutantCheckerTest {
                 "T C A C T G"};
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertTrue(result);
     }
+
 
     @Test
     public void testIsNoMutant_onlyOneCoincidence() {
@@ -35,7 +44,7 @@ public class MutantCheckerTest {
                 "T C A C T G"};
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertFalse(result);
     }
@@ -51,7 +60,7 @@ public class MutantCheckerTest {
                 "T C A C T G"};
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertFalse(result);
     }
@@ -74,7 +83,7 @@ public class MutantCheckerTest {
         };
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertFalse(result);
     }
@@ -97,7 +106,7 @@ public class MutantCheckerTest {
         };
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertFalse(result);
     }
@@ -120,7 +129,7 @@ public class MutantCheckerTest {
         };
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertTrue(result);
     }
@@ -143,7 +152,7 @@ public class MutantCheckerTest {
         };
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertTrue(result);
     }
@@ -166,7 +175,7 @@ public class MutantCheckerTest {
         };
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertTrue(result);
     }
@@ -189,7 +198,7 @@ public class MutantCheckerTest {
         };
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertTrue(result);
     }
@@ -212,7 +221,7 @@ public class MutantCheckerTest {
         };
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertTrue(result);
     }
@@ -235,7 +244,7 @@ public class MutantCheckerTest {
         };
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertTrue(result);
     }
@@ -258,7 +267,7 @@ public class MutantCheckerTest {
         };
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertTrue(result);
     }
@@ -272,7 +281,7 @@ public class MutantCheckerTest {
         };
         removeSpace(dna);
 
-        boolean result = MutantChecker.isMutant(dna);
+        boolean result = mutantChecker.isMutant(dna);
 
         assertFalse(result);
     }
@@ -286,7 +295,7 @@ public class MutantCheckerTest {
         };
         removeSpace(dna);
 
-        MutantChecker.isMutant(dna);
+        mutantChecker.isMutant(dna);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -299,7 +308,7 @@ public class MutantCheckerTest {
         };
         removeSpace(dna);
 
-        MutantChecker.isMutant(dna);
+        mutantChecker.isMutant(dna);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -307,12 +316,12 @@ public class MutantCheckerTest {
         String[] dna = {};
         removeSpace(dna);
 
-        MutantChecker.isMutant(dna);
+        mutantChecker.isMutant(dna);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidDna_null() {
-        MutantChecker.isMutant(null);
+        mutantChecker.isMutant(null);
     }
 
     private void removeSpace(String[] dna) {
