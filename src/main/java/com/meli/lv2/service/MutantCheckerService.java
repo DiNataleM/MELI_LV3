@@ -1,6 +1,7 @@
-package com.meli.lv1.service;
+package com.meli.lv2.service;
 
-import com.meli.lv1.utils.CountHelper;
+import com.meli.lv2.exception.InvalidMutantDnaException;
+import com.meli.lv2.utils.CountHelper;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
 
@@ -13,7 +14,7 @@ import static org.springframework.util.ObjectUtils.isEmpty;
  * Sabrás si un humano es mutante, si encuentras más de una secuencia de cuatro letras
  * iguales, de forma oblicua, horizontal o vertical
  */
-public class MutantChecker {
+public class MutantCheckerService {
     public static final int MAX_SEQUENCE = 4;
     public static final int SEQUENCES_TO_FIND = 2;
 
@@ -24,7 +25,7 @@ public class MutantChecker {
     private CountHelper oTRightCount;
     private CountHelper oTLeftCount;
 
-    public MutantChecker() {
+    public MutantCheckerService() {
         hCount = new CountHelper(MAX_SEQUENCE);
         vCount = new CountHelper(MAX_SEQUENCE);
         oDRightCount = new CountHelper(MAX_SEQUENCE);
@@ -39,7 +40,7 @@ public class MutantChecker {
      * @param dna
      * @return
      */
-    boolean isMutant(String[] dna) {
+    public boolean isMutant(String[] dna) {
         validateDnaParameter(dna);
 
         // Dna is NXN. so, it is a square. i can use same size.
@@ -202,11 +203,11 @@ public class MutantChecker {
     private void validateDnaParameter(String[] dna) {
 
         if (isEmpty(dna)) {
-            throw new IllegalArgumentException("The dna parameter is empty.");
+            throw new InvalidMutantDnaException("The dna parameter is empty.");
         }
 
         if (dna.length != dna[0].length()) {
-            throw new IllegalArgumentException("The dna parameter is not NXN.");
+            throw new InvalidMutantDnaException("The dna parameter is not NXN.");
         }
     }
 
