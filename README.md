@@ -13,3 +13,10 @@ For building and running the application you need:
 ```shell
 mvn spring-boot:run
 ```
+
+## Test basic EndPoint
+
+```shell
+curl -X GET  http://localhost:8080
+```
+It must return a status "200", with an "OK" message.

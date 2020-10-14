@@ -8,8 +8,8 @@ public class CountHelper {
     private int maxSequence;
 
     private int coincidence;
-    private Character actualLetter;
     private int count;
+    private Character actualLetter;
 
     public CountHelper(int maxSequence) {
         this.maxSequence = maxSequence;

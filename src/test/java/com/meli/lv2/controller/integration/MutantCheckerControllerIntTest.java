@@ -1,4 +1,4 @@
-package com.meli.lv2.controller;
+package com.meli.lv2.controller.integration;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

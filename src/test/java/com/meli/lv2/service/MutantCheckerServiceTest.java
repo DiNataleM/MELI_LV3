@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.util.ReflectionTestUtils.setField;
 
 public class MutantCheckerServiceTest {
 
@@ -14,6 +15,8 @@ public class MutantCheckerServiceTest {
     @Before
     public void setUp() {
         mutantChecker = new MutantCheckerService();
+        setField(mutantChecker, "MAX_SEQUENCE", 4);
+        setField(mutantChecker, "SEQUENCES_TO_FIND", 2);
     }
 
     @Test

@@ -16,6 +16,11 @@ public class MutantCheckerController {
     @Autowired
     private MutantCheckerService mutantChecker;
 
+    @GetMapping("/")
+    public String healthCheck() {
+        return "OK";
+    }
+
     @PostMapping("/mutant")
     @ResponseStatus(OK)
     public ResponseEntity isMutant(@RequestBody DnaModel dna) {
