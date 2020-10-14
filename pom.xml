@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.meli.lv2</groupId>
-	<artifactId>demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>MELI_LV2</artifactId>
+	<version>1.0</version>
 	<name>Lv2</name>
 	<description>Mutant Lv2</description>
 
