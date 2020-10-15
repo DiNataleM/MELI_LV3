@@ -1,4 +1,4 @@
-package com.meli.lv1.utils;
+package com.meli.lv2.utils;
 
 /**
  * This class will save the last letter, and count if is the same to before.
@@ -8,8 +8,8 @@ public class CountHelper {
     private int maxSequence;
 
     private int coincidence;
-    private Character actualLetter;
     private int count;
+    private Character actualLetter;
 
     public CountHelper(int maxSequence) {
         this.maxSequence = maxSequence;

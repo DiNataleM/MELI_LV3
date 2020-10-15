@@ -1,4 +1,4 @@
-package com.meli.lv1.service;
+package com.meli.lv2.service;
 
 
 import org.junit.Before;
@@ -6,14 +6,17 @@ import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.util.ReflectionTestUtils.setField;
 
-public class MutantCheckerTest {
+public class MutantCheckerServiceTest {
 
-    private MutantChecker mutantChecker;
+    private MutantCheckerService mutantChecker;
 
     @Before
     public void setUp() {
-        mutantChecker = new MutantChecker();
+        mutantChecker = new MutantCheckerService();
+        setField(mutantChecker, "MAX_SEQUENCE", 4);
+        setField(mutantChecker, "SEQUENCES_TO_FIND", 2);
     }
 
     @Test
