@@ -11,12 +11,12 @@ For building and running the application you need:
 ## Start the application locally
 
 ```shell
-mvn spring-boot:run
+mvn clean install spring-boot:run
 ```
 
 ## Test basic EndPoint
 
 ```shell
-curl -X GET  http://localhost:8080
+curl -X GET  http://localhost:5000
 ```
 It must return a status "200", with an "OK" message.
