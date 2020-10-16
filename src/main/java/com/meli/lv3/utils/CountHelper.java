@@ -1,4 +1,4 @@
-package com.meli.lv2.utils;
+package com.meli.lv3.utils;
 
 /**
  * This class will save the last letter, and count if is the same to before.

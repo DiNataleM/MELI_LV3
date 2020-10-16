@@ -1,9 +1,9 @@
-package com.meli.lv2.controller;
+package com.meli.lv3.controller;
 
-import com.meli.lv2.exception.InvalidMutantDnaException;
-import com.meli.lv2.model.DnaModel;
-import com.meli.lv2.model.ErrorResponse;
-import com.meli.lv2.service.MutantCheckerService;
+import com.meli.lv3.exception.InvalidMutantDnaException;
+import com.meli.lv3.model.DNAModel;
+import com.meli.lv3.model.ErrorResponse;
+import com.meli.lv3.service.MutantCheckerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,7 +26,7 @@ public class MutantCheckerControllerTest {
 
     @Test
     public void isMutant_true() {
-        DnaModel dnaModel = new DnaModel();
+        DNAModel dnaModel = new DNAModel();
         dnaModel.setDna(new String[]{});
         when(mutantChecker.isMutant(dnaModel.getDna())).thenReturn(true);
 
@@ -38,7 +38,7 @@ public class MutantCheckerControllerTest {
 
     @Test
     public void isMutant_false() {
-        DnaModel dnaModel = new DnaModel();
+        DNAModel dnaModel = new DNAModel();
         dnaModel.setDna(new String[]{});
         when(mutantChecker.isMutant(dnaModel.getDna())).thenReturn(false);
 
@@ -50,7 +50,7 @@ public class MutantCheckerControllerTest {
 
     @Test(expected = InvalidMutantDnaException.class)
     public void isMutant_Exception_doNothing() {
-        DnaModel dnaModel = new DnaModel();
+        DNAModel dnaModel = new DNAModel();
         dnaModel.setDna(new String[]{});
         when(mutantChecker.isMutant(dnaModel.getDna())).thenThrow(new InvalidMutantDnaException(""));
 

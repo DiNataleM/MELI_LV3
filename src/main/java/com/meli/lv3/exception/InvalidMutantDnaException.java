@@ -1,4 +1,4 @@
-package com.meli.lv2.exception;
+package com.meli.lv3.exception;
 
 public class InvalidMutantDnaException extends IllegalArgumentException {
 

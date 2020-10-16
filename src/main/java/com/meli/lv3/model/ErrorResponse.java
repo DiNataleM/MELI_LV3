@@ -1,4 +1,4 @@
-package com.meli.lv2.model;
+package com.meli.lv3.model;
 
 import org.springframework.http.HttpStatus;
 

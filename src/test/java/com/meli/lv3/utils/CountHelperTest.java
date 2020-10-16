@@ -1,6 +1,5 @@
-package com.meli.lv2.utils;
+package com.meli.lv3.utils;
 
-import com.meli.lv2.utils.CountHelper;
 import org.junit.Before;
 import org.junit.Test;
 

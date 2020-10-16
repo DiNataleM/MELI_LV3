@@ -1,6 +1,6 @@
-package com.meli.lv2.model;
+package com.meli.lv3.model;
 
-public class DnaModel {
+public class DNAModel {
 
     private String[] dna;
 

@@ -1,10 +1,10 @@
-package com.meli.lv2.utils;
+package com.meli.lv3.utils;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.meli.lv2.utils.DirectionCountHelper.Direction.HORIZONTAL;
-import static com.meli.lv2.utils.DirectionCountHelper.Direction.VERTICAL;
+import static com.meli.lv3.utils.DirectionCountHelper.Direction.HORIZONTAL;
+import static com.meli.lv3.utils.DirectionCountHelper.Direction.VERTICAL;
 import static org.junit.Assert.assertEquals;
 
 public class DirectionCountHelperTest {

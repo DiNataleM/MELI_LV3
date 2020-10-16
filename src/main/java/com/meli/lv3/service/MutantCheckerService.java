@@ -1,11 +1,11 @@
-package com.meli.lv2.service;
+package com.meli.lv3.service;
 
-import com.meli.lv2.exception.InvalidMutantDnaException;
-import com.meli.lv2.utils.DirectionCountHelper;
+import com.meli.lv3.exception.InvalidMutantDnaException;
+import com.meli.lv3.utils.DirectionCountHelper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import static com.meli.lv2.utils.DirectionCountHelper.Direction.*;
+import static com.meli.lv3.utils.DirectionCountHelper.Direction.*;
 import static org.springframework.util.ObjectUtils.isEmpty;
 
 /**

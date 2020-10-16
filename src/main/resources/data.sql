@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS dna_checked;
+
+CREATE TABLE dna_checked (
+  id INT AUTO_INCREMENT  PRIMARY KEY,
+  dna LONGTEXT NOT NULL,
+  is_mutant NUMBER(1) NOT NULL
+);
