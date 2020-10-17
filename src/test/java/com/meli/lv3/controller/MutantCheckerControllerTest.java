@@ -3,6 +3,7 @@ package com.meli.lv3.controller;
 import com.meli.lv3.exception.InvalidMutantDnaException;
 import com.meli.lv3.model.DNAModel;
 import com.meli.lv3.model.ErrorResponse;
+import com.meli.lv3.service.DNADBService;
 import com.meli.lv3.service.MutantCheckerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.http.HttpStatus.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -20,6 +21,9 @@ public class MutantCheckerControllerTest {
 
     @Mock
     private MutantCheckerService mutantChecker;
+
+    @Mock
+    private DNADBService dnadbService;
 
     @InjectMocks
     private MutantCheckerController controller;
@@ -33,6 +37,7 @@ public class MutantCheckerControllerTest {
         ResponseEntity result = controller.isMutant(dnaModel);
 
         assertEquals(OK, result.getStatusCode());
+        verify(dnadbService, times(1)).persistDNA(dnaModel, true);
 
     }
 
@@ -45,6 +50,7 @@ public class MutantCheckerControllerTest {
         ResponseEntity result = controller.isMutant(dnaModel);
 
         assertEquals(FORBIDDEN, result.getStatusCode());
+        verify(dnadbService, times(1)).persistDNA(dnaModel, false);
 
     }
 
@@ -55,11 +61,10 @@ public class MutantCheckerControllerTest {
         when(mutantChecker.isMutant(dnaModel.getDna())).thenThrow(new InvalidMutantDnaException(""));
 
         controller.isMutant(dnaModel);
-
     }
 
     @Test
-    public void invalidParamter() {
+    public void invalidParameter() {
         String myError = "myError";
         InvalidMutantDnaException e = new InvalidMutantDnaException(myError);
 
@@ -67,5 +72,7 @@ public class MutantCheckerControllerTest {
 
         assertEquals(myError, result.getMessage());
         assertEquals(BAD_REQUEST, result.getHttpStatus());
+
+        verify(dnadbService, times(0)).persistDNA(any(DNAModel.class), anyBoolean());
     }
 }

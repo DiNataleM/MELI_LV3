@@ -25,7 +25,7 @@ public class    MutantCheckerController {
     public ResponseEntity isMutant(@RequestBody DNAModel dna) {
         boolean isMutant = checkerService.isMutant(dna.getDna());
 
-        dnadbService.persistIsMutant(dna, isMutant);
+        dnadbService.persistDNA(dna, isMutant);
 
         return new ResponseEntity((isMutant) ? OK : FORBIDDEN);
     }
