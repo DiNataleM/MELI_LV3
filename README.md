@@ -11,7 +11,7 @@ For building and running the application you need:
 ## Start the application locally
 
 ```shell
-mvn clean install spring-boot:run
+mvn -Plocal clean install spring-boot:run
 ```
 
 ## Test basic EndPoint
