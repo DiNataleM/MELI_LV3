@@ -13,10 +13,10 @@ public interface DNARepository extends JpaRepository<DNA, Long> {
     @Query("select count(*) > 0 from dna_checked where dna = :dna")
     boolean existsByDna(@Param("dna") String dna);
 
-    @Query("select count(*) from dna_checked where is_mutant = 0")
+    @Query("select count(distinct dna) from dna_checked where is_mutant = 0")
     int getHumanCount();
 
-    @Query("select count(*) from dna_checked where is_mutant = 1")
+    @Query("select count(distinct dna) from dna_checked where is_mutant = 1")
     int getMutantCount();
 
 }

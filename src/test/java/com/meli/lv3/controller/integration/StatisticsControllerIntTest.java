@@ -1,5 +1,6 @@
 package com.meli.lv3.controller.integration;
 
+import com.meli.lv3.db.repository.DNARepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,19 @@ public class StatisticsControllerIntTest {
     @Autowired
     private MockMvc mvc;
 
+    @Autowired
+    private DNARepository dnaRepository;
+
     @Test
     public void testGetStats() throws Exception {
         //Mutant
+        mvc.perform(post(MUTANT_URL)
+                .content("{\n" +
+                        "\"dna\":[\"ATGCGA\",\"CAGTGC\",\"TTATGT\",\"AGAAGG\",\"CCCCTA\",\"TCACTG\"]\n" +
+                        "}\n")
+                .contentType(APPLICATION_JSON));
+
+        //Mutant -- repeat
         mvc.perform(post(MUTANT_URL)
                 .content("{\n" +
                         "\"dna\":[\"ATGCGA\",\"CAGTGC\",\"TTATGT\",\"AGAAGG\",\"CCCCTA\",\"TCACTG\"]\n" +
@@ -42,6 +53,13 @@ public class StatisticsControllerIntTest {
                         "}\n")
                 .contentType(APPLICATION_JSON));
 
+        //Human - Repeat
+        mvc.perform(post(MUTANT_URL)
+                .content("{\n" +
+                        "\"dna\":[\"TTGCAA\",\"CAGTGC\",\"TTATGT\",\"AGAAGG\",\"CCACTA\",\"TCACTG\"]\n" +
+                        "}\n")
+                .contentType(APPLICATION_JSON));
+
         //Human
         mvc.perform(post(MUTANT_URL)
                 .content("{\n" +
@@ -49,7 +67,10 @@ public class StatisticsControllerIntTest {
                         "}\n")
                 .contentType(APPLICATION_JSON));
 
-        Thread.sleep(1000);
+        int tryNumber = 5;
+        do {
+            Thread.sleep(100);
+        } while (dnaRepository.count() < 3 && tryNumber-- > 0);
 
         MvcResult result = mvc.perform(get(URL_STATS)).andExpect(status().isOk()).andReturn();
 
